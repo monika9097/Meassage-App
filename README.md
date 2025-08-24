@@ -1,74 +1,74 @@
-# 📨 Message Application on AWS EKS using Terraform, Docker & Helm
+#  Message Application on AWS EKS using Terraform, Docker & Helm
 
 This project demonstrates the end-to-end deployment of a Flask-based Message Application on Amazon EKS. The infrastructure is provisioned using Terraform, the application is containerized with Docker, deployed using Helm, and monitored with Prometheus and Alertmanager (with Slack/email integration). NGINX ingress is used to expose the service externally.
 
- ✅ Built from scratch, this project reflects hands-on experience in deploying microservices on Kubernetes using modern DevOps tools and best practices.
+ Built from scratch, this project reflects hands-on experience in deploying microservices on Kubernetes using modern DevOps tools and best practices.
 
 ---
 
-## 📸 Application Preview
+## Application Preview
 
-### 🔹 Get Message Form
+###  Get Message Form
 > `http://<ingress-host>/get/messages`
 
 ![Get Message Form](message-app/screenshots/get_messages.png)
 
 ---
 
-### 🔹 Get Message Output
+###  Get Message Output
 > `http://<ingress-host>/get/messages/<account_id>`
 
 ![Get Message Output](message-app/screenshots/get_message_output.png)
 
 ---
 
-### 🔹 Create Message Form
+### Create Message Form
 > `http://<ingress-host>/create`
 
 ![Create Message Form](message-app/screenshots/create_message.png)
 
 ---
 
-### 🔹 Create Message Output
+###  Create Message Output
 > After form submission
 
 ![Create Message Output](message-app/screenshots/create_output.png)
 
 ---
 
-### 🔹 Search Message Form & Result
+###  Search Message Form & Result
 > `http://<ingress-host>/search`
 
 ![Search Message Screenshot](message-app/screenshots/search_message.png)
 
 ---
 
-### 🔹 Prometheus Dashboard
+###  Prometheus Dashboard
 > `http://<ingress-host>/prometheus`
 
 ![Prometheus Screenshot](message-app/screenshots/prometheus.png)
 
 ---
 
-### 🔹 Alertmanager Dashboard
+###  Alertmanager Dashboard
 > `http://<ingress-host>/alertmanager`
 
 ![Alertmanager Screenshot](message-app/screenshots/alertmanager.png)
 
 ---
 
-## 📌 Project Highlights
+##  Project Highlights
 
-- 🌩️ **Infrastructure-as-Code (IaC)** with Terraform to provision EKS cluster, VPC, subnets, IAM roles
-- 🐳 **Dockerized Flask App** connected to a PostgreSQL database
-- 🧭 **Helm-based deployment** for the app and DB with health checks, secrets, autoscaling, PVCs
-- 🌐 **NGINX Ingress Controller** to expose multiple HTTP routes
-- 📊 **Prometheus & Alertmanager** with Slack/email alerting for application and infrastructure monitoring
-- 🔒 Secrets and ConfigMaps to secure environment variables and DB credentials
+-  **Infrastructure-as-Code (IaC)** with Terraform to provision EKS cluster, VPC, subnets, IAM roles
+-  **Dockerized Flask App** connected to a PostgreSQL database
+- **Helm-based deployment** for the app and DB with health checks, secrets, autoscaling, PVCs
+- **NGINX Ingress Controller** to expose multiple HTTP routes
+-  **Prometheus & Alertmanager** with Slack/email alerting for application and infrastructure monitoring
+- Secrets and ConfigMaps to secure environment variables and DB credentials
 
 ---
 
-## 🧰 Tech Stack
+## Tech Stack
 
 | Category           | Tools Used                                                                 |
 |-------------------|------------------------------------------------------------------------------|
@@ -85,13 +85,13 @@ This project demonstrates the end-to-end deployment of a Flask-based Message App
 
 ---
 
-## 🚀 How to Deploy This Project
+##  How to Deploy This Project
 
-> You need: AWS credentials, Docker, kubectl, Terraform, Helm installed and configured.
+You need: AWS credentials, Docker, kubectl, Terraform, Helm installed and configured.
 
 ---
 
-### 1️⃣ Provision EKS Cluster using Terraform
+### 1. Provision EKS Cluster using Terraform
 ```bash
 cd message_application/terraform/
 ```
@@ -106,20 +106,20 @@ terraform plan
 terraform apply
 
 
-✅ This creates the EKS cluster, VPC, public subnets, node group, security groups, and IAM roles.
+ This creates the EKS cluster, VPC, public subnets, node group, security groups, and IAM roles.
 
 To destroy the cluster later:
 
  terraform destroy
 
-2️⃣ Configure kubectl to Connect to EKS
+### 2. Configure kubectl to Connect to EKS
     ``` aws eks update-kubeconfig --name my-eks-cluster --region <your-region> ```
 
-3️⃣ Build and Tag Docker Image
+### 3. Build and Tag Docker Image
 ```cd message-image/ ```
 ``` docker build -t message/message_service:latest . ```
 
-4️⃣ Push Image to AWS ECR
+### 4️. Push Image to AWS ECR
 # Authenticate Docker to ECR
 ```aws ecr get-login-password --region <region> | docker login --username AWS --password-stdin <account-id>.dkr.ecr.<region>.amazonaws.com ```
 
@@ -132,7 +132,7 @@ To destroy the cluster later:
 # Push the image
 ```docker push <account-id>.dkr.ecr.<region>.amazonaws.com/message-service:latest```
 
-5️⃣ Deploy Application using Helm
+### 5. Deploy Application using Helm
 ```cd message_application/messageapp/```
 
 ```helm upgrade --install -n message --create-namespace message messageapp/ \ ```
@@ -142,7 +142,7 @@ To destroy the cluster later:
 
 Includes: Flask app, PostgreSQL StatefulSet, secrets, autoscaling, and volumes
 
-6️⃣ Set Up Ingress Controller
+### 6. Set Up Ingress Controller
 ```kubectl apply -f message_application/ingress-controller.yaml```
 
 
@@ -159,7 +159,7 @@ http://<hostname>/create
 
 http://<hostname>/search
 
-7️⃣ Install Prometheus
+### 7️. Install Prometheus
 ```cd message_application/ ```
 ```helm upgrade --install prometheus -n prom --create-namespace prometheus/```
 
@@ -168,7 +168,7 @@ Get Prometheus URL:
 
 ```kubectl get ingress -A | grep prometheus-ingress | awk '{print $5}'```
 
-8️⃣ Install Alertmanager
+### 8️. Install Alertmanager
 ```helm upgrade --install alertmanager -n prom --create-namespace alertmanager/```
 
 
@@ -177,9 +177,9 @@ Get Alertmanager URL:
 ```kubectl get ingress -A | grep alertmanager-ingress | awk '{print $5}'```
 
 
-✅ Slack and email alert receivers are preconfigured in alertmanager/ Helm chart.
+ Slack and email alert receivers are preconfigured in alertmanager/ Helm chart.
 
-📂 Application Structure
+ Application Structure
 message_application/
 ├── terraform/                 # EKS Infra setup
 ├── messageapp/                # Helm chart for Flask app + DB
@@ -191,15 +191,15 @@ message-image/
 ├── requirements.txt           # Python dependencies
 ├── Dockerfile                 # Image build file
 
-🎯 Why This Project is Valuable
+ Why This Project is Valuable ?
 
 This project simulates a real-world DevOps workflow by covering:
 
-✅ Infrastructure provisioning (IaC)
-✅ Containerization & registry integration
-✅ Kubernetes-based deployments using Helm
-✅ Monitoring and alerting stack integration
-✅ Secure deployments with Secrets and Ingress routing
+Infrastructure provisioning (IaC)
+Containerization & registry integration
+Kubernetes-based deployments using Helm
+Monitoring and alerting stack integration
+Secure deployments with Secrets and Ingress routing
 
 By completing this project, I gained practical experience in:
 
@@ -213,6 +213,5 @@ Integrating observability into microservices
 
  Using Terraform to manage infrastructure lifecycles
 
-🙋‍♂️ Author
-    Monika Kumari
-    LinkedIn: https://www.linkedin.com/in/monika-kumari-a5a209201/
+Author : Monika Kumari
+LinkedIn: https://www.linkedin.com/in/monika-kumari-a5a209201/
