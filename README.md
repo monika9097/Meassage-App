@@ -113,7 +113,7 @@ To destroy the cluster later:
  terraform destroy
 
 ### 2. Configure kubectl to Connect to EKS
-    ``` aws eks update-kubeconfig --name my-eks-cluster --region <your-region> ```
+    aws eks update-kubeconfig --name my-eks-cluster --region <your-region>
 
 ### 3. Build and Tag Docker Image
 ```cd message-image/ ```
