@@ -2,7 +2,7 @@
 
 This project demonstrates the end-to-end deployment of a Flask-based Message Application on Amazon EKS. The infrastructure is provisioned using Terraform, the application is containerized with Docker, deployed using Helm, and monitored with Prometheus and Alertmanager (with Slack/email integration). NGINX ingress is used to expose the service externally.
 
-> ✅ Built from scratch, this project reflects hands-on experience in deploying microservices on Kubernetes using modern DevOps tools and best practices.
+ ✅ Built from scratch, this project reflects hands-on experience in deploying microservices on Kubernetes using modern DevOps tools and best practices.
 
 ---
 
@@ -11,49 +11,49 @@ This project demonstrates the end-to-end deployment of a Flask-based Message App
 ### 🔹 Get Message Form
 > `http://<ingress-host>/get/messages`
 
-![Get Message Form](screenshots/get_messages.png)
+![Get Message Form](message-app/screenshots/get_messages.png)
 
 ---
 
 ### 🔹 Get Message Output
 > `http://<ingress-host>/get/messages/<account_id>`
 
-![Get Message Output](screenshots/get_message_output.png)
+![Get Message Output](message-app/screenshots/get_message_output.png)
 
 ---
 
 ### 🔹 Create Message Form
 > `http://<ingress-host>/create`
 
-![Create Message Form](screenshots/create_message.png)
+![Create Message Form](message-app/screenshots/create_message.png)
 
 ---
 
 ### 🔹 Create Message Output
 > After form submission
 
-![Create Message Output](screenshots/create_output.png)
+![Create Message Output](message-app/screenshots/create_output.png)
 
 ---
 
 ### 🔹 Search Message Form & Result
 > `http://<ingress-host>/search`
 
-![Search Message Screenshot](screenshots/search_message.png)
+![Search Message Screenshot](message-app/screenshots/search_message.png)
 
 ---
 
 ### 🔹 Prometheus Dashboard
 > `http://<ingress-host>/prometheus`
 
-![Prometheus Screenshot](screenshots/prometheus.png)
+![Prometheus Screenshot](message-app/screenshots/prometheus.png)
 
 ---
 
 ### 🔹 Alertmanager Dashboard
 > `http://<ingress-host>/alertmanager`
 
-![Alertmanager Screenshot](screenshots/alertmanager.png)
+![Alertmanager Screenshot](message-app/screenshots/alertmanager.png)
 
 ---
 
@@ -95,9 +95,9 @@ This project demonstrates the end-to-end deployment of a Flask-based Message App
 ```bash
 cd message_application/terraform/
 ```
-> Update variables.tf with your AWS region (e.g. us-east-1)
+Update variables.tf with your AWS region (e.g. us-east-1)
 
-> Update terraform.tfvars with your aws_access_key and aws_secret_key
+Update terraform.tfvars with your aws_access_key and aws_secret_key
 
 Then run:
 
@@ -203,15 +203,16 @@ This project simulates a real-world DevOps workflow by covering:
 
 By completing this project, I gained practical experience in:
 
-> Designing scalable infrastructure on AWS
+Designing scalable infrastructure on AWS
 
-> Handling Helm chart templating
+ Handling Helm chart templating
 
-> Configuring Kubernetes networking and persistent storage
+Configuring Kubernetes networking and persistent storage
 
-> Integrating observability into microservices
+Integrating observability into microservices
 
-> Using Terraform to manage infrastructure lifecycles
+ Using Terraform to manage infrastructure lifecycles
 
 🙋‍♂️ Author
     Monika Kumari
+    LinkedIn: https://www.linkedin.com/in/monika-kumari-a5a209201/
